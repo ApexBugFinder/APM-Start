@@ -16,6 +16,7 @@
             </div>
         </div>
         <div class="table-responsive" >
+            <!--Uses *ngIf to toggle the table if there are products to display-->
             <table class="table" *ngIf='products && products.length'>
                 <thead>
                     <tr>
@@ -42,18 +43,23 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
+                    <!--Uses ngFor loop to display information on all products -->
                     <tr *ngFor="let product of products">
-                        <td></td>
+                        <td>
+                            <!--Adds image and binds image width and margin values declared in product-list.component class -->
+                            <img [src]='product.imageUrl' 
+                            [title]='product.productName'
+                            [style.width.px]='imageWidth'
+                            [style.margin.px]='imageMargin'>
+                        </td>
+                        <!--Uses interpolation to display product information -->
                         <td>{{ product.productName }}</td>
                         <td>{{ product.productCode }}</td>
                         <td>{{ product.releaseDate }}</td>
                         <td>{{ product.price }}</td>
                         <td>{{ product.starRating }}</td>
                     </tr>
-=======
 
->>>>>>> 793eadc3853077a5fcf66a5078c919b43c89234f
                 </tbody>
             </table>
         </div>
