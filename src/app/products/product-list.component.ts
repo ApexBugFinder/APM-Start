@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from "./product";
 
 @Component({
     selector: 'pm-products',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
 })
 
 export class ProductListComponent {
+<<<<<<< HEAD
+=======
+
+>>>>>>> Interfaces_Encapsulating_LCHooks_CustomPipes_Filtering2
     // Properties
     // ---------------------------------------
     pageTitle: string = 'Product List';
@@ -18,7 +23,12 @@ export class ProductListComponent {
     listFilter: string = 'cart'
 
     // Products to display
+<<<<<<< HEAD
     products: any[] = [
+=======
+    products: IProduct[] = [
+
+>>>>>>> Interfaces_Encapsulating_LCHooks_CustomPipes_Filtering2
         {
             "productId": 1,
             "productName": "Leaf Rake",
