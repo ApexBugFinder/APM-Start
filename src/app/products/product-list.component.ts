@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from "./product";
 
 @Component({
     selector: 'pm-products',
@@ -6,8 +7,21 @@ import { Component } from '@angular/core';
 })
 
 export class ProductListComponent {
-    pageTitle: string = 'Product List'
-    products: any[] = [
+
+    // Properties
+    // ---------------------------------------
+    pageTitle: string = 'Product List';
+    // Image Dimensions and toggle boolean
+    showImage: boolean = false;
+    imageWidth: number = 50;
+    imageMargin: number = 2;
+
+    // List Filter
+    listFilter: string = 'cart'
+
+    // Products to display
+    products: IProduct[] = [
+
         {
             "productId": 1,
             "productName": "Leaf Rake",
