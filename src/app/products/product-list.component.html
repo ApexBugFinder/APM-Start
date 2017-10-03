@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                     <!--Uses ngFor loop to display information on all products -->
-                    <tr *ngFor="let product of products">
+                    <tr *ngFor="let product of filteredProducts">
                         <td>
                             <!--Adds image and binds image width and margin values declared in product-list.component class -->
                             <img *ngIf='showImage'
@@ -56,10 +56,15 @@
                         </td>
                         <!--Uses interpolation to display product information -->
                         <td>{{ product.productName }}</td>
-                        <td>{{ product.productCode | lowercase }}</td>
+                        <td>{{ product.productCode | lowercase | convertToSpaces:'-'}}</td>
                         <td>{{ product.releaseDate }}</td>
                         <td>{{ product.price | currency:'USD':true:'1.2-2' }}</td>
-                        <td>{{ product.starRating }}</td>
+                        <td>
+                            <pm-star 
+                                [rating]='product.starRating'
+                                (ratingClicked)='onRatingClicked($event, product.productName)'>
+                            </pm-star>
+                        </td>
                     </tr>
 
                 </tbody>
