@@ -9,6 +9,7 @@ import { ProductService } from "./products/product.service";
     <pm-products></pm-products>
   </div>
   `,
+  // Services added to app.component gives all the component's children access to the service 
   providers: [ ProductService ]
 })
 

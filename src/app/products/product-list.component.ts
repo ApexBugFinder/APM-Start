@@ -25,7 +25,7 @@ export class ProductListComponent implements OnInit{
     showImage: boolean = false;
     imageWidth: number = 50;
     imageMargin: number = 2;
-
+    errorMessage: string;
     // List Filter
 
     
@@ -66,8 +66,23 @@ export class ProductListComponent implements OnInit{
     // LifeCyle Hook: Method required to implement OnInit class.  Gives you a chance to have values initialized when the class is first initialized
      ngOnInit(): void {
         console.log('In OnInit');
+        
+        // Gets products from Products service
+        //this.products = this._productService.getProducts();
         //Use OnInit LifeCyle Hook to initialize data from ProductService
-        this.products = this._productService.getProducts();
+
+        //Now that we are using an observable it can no longer retrieve and assign to this.products
+        // Instead you have have to subscribe this.products to listen for the observable response 
+        this._productService.getProducts()
+            .subscribe(products => 
+            // use curly brackets to enable multiline commands
+            {
+                this.products = products;
+                this.filteredProducts = this.products;
+            } 
+                , error => this.errorMessage = <any>error);
+
+
         console.log(JSON.stringify(this.products));
         //moved from constructor because the constructor gets run before ngOnInit so therefore this.products
         // will be empty when assigning it to the this.filteredProducts
