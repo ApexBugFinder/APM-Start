@@ -55,14 +55,14 @@
                             [style.margin.px]='imageMargin'>
                         </td>
                         <!--Uses interpolation to display product information -->
-                        <td>{{ product.productName }}</td>
+                        <td><a [routerLink]="['/products', product.productId]">{{ product.productName }}</a></td>
                         <td>{{ product.productCode | lowercase | convertToSpaces:'-'}}</td>
                         <td>{{ product.releaseDate }}</td>
                         <td>{{ product.price | currency:'USD':true:'1.2-2' }}</td>
                         <td>
                             <pm-star 
                                 [rating]='product.starRating'
-                                (ratingClicked)='onRatingClicked($event, product.productName)'>
+                                (ratingClicked)='onRatingClicked($event)'>
                             </pm-star>
                         </td>
                     </tr>

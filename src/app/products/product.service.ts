@@ -15,9 +15,8 @@ export class ProductService {
     // Add a private string for the URL where the data is located
     private _productUrl = './api/products/products.json';
     // Add a contructor so that upon creation the class is instantiated with HTTPClient
-    constructor(private _http: HttpClient){
-      
-    }
+    constructor(private _http: HttpClient){}
+    
 
     //HARD CODED DATA
     // Class only has one method to provide the product list, managing and manipulation of this data is done by the component

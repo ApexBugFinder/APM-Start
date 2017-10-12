@@ -1,0 +1,16 @@
+
+<!-- ngIf works better, if the product object has a value then it displays panel
+     and you don't need to use the Safe Navigation operator-->
+<div class="panel panel-primary" *ngIf="product">
+  <div class="panel-heading">
+    <!-- Safe navigation operator * if product.productName does not have a value
+    it will return a null instead of a undefined property error
+    {{pageTitle + ': ' + product?.productName}}-->
+    {{pageTitle + ': ' + product.productName}}
+  </div>
+  <div class="panel-footer">
+    <a href="" class="btn btn-default" (click)='onBack()' style='width:80px'>
+      <i class="glyphicon glyphicon-chevron-left"></i>
+    </a>
+  </div>
+</div>

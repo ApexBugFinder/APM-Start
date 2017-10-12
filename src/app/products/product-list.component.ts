@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { IProduct } from "./product";
 import { ProductService } from "./product.service";
 import { stringify } from "querystring";
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'pm-products',
+    // Using routing the selector is no longer needed
+    // selector: 'pm-products',
     templateUrl: './product-list.component.html',
     //Encapuslated unique style sheet
     styleUrls: ['./product-list.component.css']
@@ -32,7 +33,7 @@ export class ProductListComponent implements OnInit{
 
     // Products to display
 
-     _listFilter: string = '';
+     _listFilter: string;
     get listFilter(): string{
         return this._listFilter;
     }
@@ -40,22 +41,24 @@ export class ProductListComponent implements OnInit{
         this._listFilter = value;
         this.filteredProducts = this._listFilter ? this.performFilter(this.listFilter) : this.products;
     }
+    // filter Product List
+    filteredProducts: IProduct[];
     // Products to display using the interface IProduct
     products: IProduct[] = [];
 
-   // filter Product List
-   filteredProducts: IProduct[];
+   
+ 
 
     // METHODS
     // ---------------------------------
     constructor(private _productService: ProductService) {
         //this.filteredProducts = this.products;
-        this.listFilter = this._listFilter;
+        //this.listFilter = this._listFilter;
     }
 
     // method used when ratingClicked event is triggered
-    onRatingClicked(message: string, message2: string): void {
-        this.pageTitle = 'Product List: ' + message + ' ' + message2;
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Product List: ' + message;
     } 
 
     // Method to toggle product image on and off - used by the Show buttom

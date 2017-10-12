@@ -3,8 +3,8 @@ export interface IProduct {
     productName: string;
     productCode: string;
     releaseDate: string;
-    description: string;
     price: number;
+    description: string;
     starRating: number;
     imageUrl: string;
 }
