@@ -6,7 +6,51 @@
     <!-- Safe navigation operator * if product.productName does not have a value
     it will return a null instead of a undefined property error
     {{pageTitle + ': ' + product?.productName}}-->
-    {{pageTitle + ': ' + product.productName}}
+    {{pageTitle + ': ' + product.productId + ' ' + product.productName}}
+  </div>
+  <div class="panel-body">
+    <table *ngIf='product'>
+      <tbody>
+          <tr>
+              <td class='title'>Name:</td>
+              <td>{{product.productName}}</td>
+          </tr>
+          <tr>
+              <td class='title'>Product Code:</td>
+              <td>{{product.productCode | lowercase | convertToSpaces:'-'}}</td>
+          </tr>
+          <tr>
+              <td class='title'>Description:</td>
+              <td>{{product.description}}</td>
+          </tr>
+          <tr>
+              <td class='title'>Availability:</td>
+              <td>{{product.releaseDate}}</td>
+          </tr>
+          <tr>
+              <td class='title'>Price:</td>
+              <td>{{product.price | currency:'USD':'1.2-2'}}</td>
+          </tr>
+          <tr>
+              <td class='title'>5 Star Rating:</td>
+              <td>
+                <pm-star [rating]='product.starRating'>
+                </pm-star>
+              </td>
+          </tr>
+          <tr>
+              <td>
+                <img [src]='product.imageUrl' 
+                  [title]='product.productName'
+                  [style.width.px]='imageWidth'
+                  [style.margin.px]='imageMargin'>
+              </td>
+             
+
+            </tr>
+      </tbody>
+    </table>
+    
   </div>
   <div class="panel-footer">
     <a href="" class="btn btn-default" (click)='onBack()' style='width:80px'>

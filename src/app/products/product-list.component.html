@@ -55,7 +55,10 @@
                             [style.margin.px]='imageMargin'>
                         </td>
                         <!--Uses interpolation to display product information -->
-                        <td><a [routerLink]="['/products', product.productId]">{{ product.productName }}</a></td>
+                        <td><a [routerLink]="['/products', product.productId]">
+                            {{ product.productName }}
+                            </a>
+                        </td>
                         <td>{{ product.productCode | lowercase | convertToSpaces:'-'}}</td>
                         <td>{{ product.releaseDate }}</td>
                         <td>{{ product.price | currency:'USD':true:'1.2-2' }}</td>
@@ -71,4 +74,7 @@
             </table>
         </div>
     </div> <!--closes panel-body-->
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
 </div>

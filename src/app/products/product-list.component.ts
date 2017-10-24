@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from "./product";
 import { ProductService } from "./product.service";
-import { stringify } from "querystring";
-import { ActivatedRoute } from '@angular/router';
+//import { stringify } from "querystring";
 
 @Component({
     // Using routing the selector is no longer needed
@@ -58,14 +57,25 @@ export class ProductListComponent implements OnInit{
 
     // method used when ratingClicked event is triggered
     onRatingClicked(message: string): void {
-        this.pageTitle = 'Product List: ' + message;
+        this.pageTitle += ': ' + message;
     } 
+
+    
+
+    performFilter(filterBy: string): IProduct[] {
+        filterBy = filterBy.toLocaleLowerCase();
+        return this.products.filter((product: IProduct) => 
+            product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
+
 
     // Method to toggle product image on and off - used by the Show buttom
     toggleImage(): void {
         this.showImage = !this.showImage;
 
     }
+
+
     // LifeCyle Hook: Method required to implement OnInit class.  Gives you a chance to have values initialized when the class is first initialized
      ngOnInit(): void {
         console.log('In OnInit');
@@ -77,27 +87,23 @@ export class ProductListComponent implements OnInit{
         //Now that we are using an observable it can no longer retrieve and assign to this.products
         // Instead you have have to subscribe this.products to listen for the observable response 
         this._productService.getProducts()
-            .subscribe(products => 
+            .subscribe(products => {
             // use curly brackets to enable multiline commands
-            {
+            
                 this.products = products;
                 this.filteredProducts = this.products;
-            } 
-                , error => this.errorMessage = <any>error);
+            }, 
+                 error => this.errorMessage = <any>error);
 
 
-        console.log(JSON.stringify(this.products));
+        //console.log(JSON.stringify(this.products));
         //moved from constructor because the constructor gets run before ngOnInit so therefore this.products
         // will be empty when assigning it to the this.filteredProducts
-        this.filteredProducts = this.products;
-        console.log(JSON.stringify(this.filteredProducts));
-        this.listFilter = this._listFilter;
+       // this.filteredProducts = this.products;
+      //  console.log(JSON.stringify(this.filteredProducts));
+        //this.listFilter = this._listFilter;
     }
 
     // Filters the products list by the filterBy string
-    performFilter(filterBy: string): IProduct[] {
-        filterBy = filterBy.toLocaleLowerCase();
-        return this.products.filter((product: IProduct) => 
-            product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
-    }
+    
 }

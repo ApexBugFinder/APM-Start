@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 
 @Component({
@@ -17,18 +18,22 @@ import { IProduct } from './product';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
+  errorMessage: string;
 
   pageTitle: string = 'Product Detail';
   product: IProduct;
+  imageWidth: number = 50;
+  imageMargin: number = 2;
 
   // Instantiate an instance of the ActivatedRoute in the constructor to pass in the id.
   //  You will use the id to get the right product from IProduct
   constructor(private _route: ActivatedRoute, 
                   private _router: Router,
-                  private _location: Location) { 
+                  private _location: Location,
+                  private _productService: ProductService) { 
 
     //  This console log statements sends id to console just to take a look at it
-    console.log(this._route.snapshot.paramMap.get('id'));
+    // console.log(this._route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {
@@ -36,22 +41,29 @@ export class ProductDetailComponent implements OnInit {
     //  or whatever value you are reading to change you would use the observable approach
     // the let variable is a scoped variable
     //  the + sign in front of this._route turns the string into a numeric Id 
-    let pId = +this._route.snapshot.paramMap.get('id');
-    
-    this.pageTitle += `: ${pId}`;
-    this.product = {
-      "productId" : pId,
-      "productName" : "Leaf Lake",
-      "productCode" : "GDN-0011",
-      "releaseDate" : "March 19, 2016",
-      "description" : "Leaf rake with 48 inch handle",
-      "price" : 19.95,
-      "starRating" : 3.2,
-      "imageUrl" : "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
-    }
-    console.log('The product id is: ' + this.product.productId);
+    const pId = +this._route.snapshot.paramMap.get('id');
+    this.getProduct(pId);
+    console.log('The product id is: ' + this.product.productName);
+    this.pageTitle += `: ${this.product.productId}: ${this.product.productName}`;
+    // this.product = {
+    //   "productId" : pId,
+    //   "productName" : "Leaf Lake",
+    //   "productCode" : "GDN-0011",
+    //   "releaseDate" : "March 19, 2016",
+    //   "description" : "Leaf rake with 48 inch handle",
+    //   "price" : 19.95,
+    //   "starRating" : 3.2,
+    //   "imageUrl" : "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png"
+    // }
+    // console.log('The product id is: ' + this.product.productId);
   }
-    
+
+  getProduct(id: number){
+    this._productService.getProduct(id).subscribe(product => {
+          this.product = product;
+          console.log('The product id is: ' + this.product.productName);
+        }, error => this.errorMessage = <any>error);
+  }  
   onBack(): void {
 
     console.log('Running onBack');
@@ -60,7 +72,7 @@ export class ProductDetailComponent implements OnInit {
     //     console.log(i);
     // }
    // this._location.back();
-    this._router.navigate(['/products']);
+   this._router.navigate(['/products']);
   }
 
 }

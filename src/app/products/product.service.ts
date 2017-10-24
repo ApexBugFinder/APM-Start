@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/map';
 
 
 
@@ -14,6 +15,8 @@ export class ProductService {
         
     // Add a private string for the URL where the data is located
     private _productUrl = './api/products/products.json';
+   
+   
     // Add a contructor so that upon creation the class is instantiated with HTTPClient
     constructor(private _http: HttpClient){}
     
@@ -74,6 +77,11 @@ export class ProductService {
     private handleError(err: HttpErrorResponse){
         console.log(err.message);
         return Observable.throw(err.message);
+    }
+
+    getProduct(id: number): Observable<IProduct> {
+        return this.getProducts().map((products: IProduct[]) => products.find(p => p.productId === id) );
+        
     }
     
 }
