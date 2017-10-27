@@ -22,9 +22,10 @@ import { ProductService } from "./products/product.service";
   
   `,
   // Services added to app.component gives all the component's children access to the service 
-  providers: [ ProductService ]
+  // providers were declared now in the productModule module
+  // providers: [ ProductService ]
 })
 
 export class AppComponent {
-  pageTitle: string = 'Acme Product Management'
+  pageTitle: string = 'Orville Product Management'
 }
