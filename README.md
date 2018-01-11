@@ -2,6 +2,22 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.4.
 
+# Institution: Pluralsight Course: Angular: Getting Started 
+
+# Instructor: Deborah Kurata
+
+## Topics:
+
+  * Introduction to Components.
+  * Templates, Interpolation, and Directives.
+  * Data Binding and Pipes.
+  * Building Nested Components.
+  * Services and Dependency Injection.
+  * Retrieving Data Using HTTP.
+  * Navigation and Routing.
+  * Modules.
+  * Building, Testing & Deploying CLI.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
